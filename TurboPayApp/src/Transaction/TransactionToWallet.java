@@ -1,16 +1,20 @@
 package Transaction;
 
 import API.DatabaseAPI;
+import API.ValidatorAPI;
 import AccountDatabaseManger.*;
 import UserAccount.UserAccount;
+import Validator.BankIdValidator;
+import Validator.PhoneValidator;
 
 
 public class TransactionToWallet implements Transaction{
 
     @Override
     public void transfer(int amount, UserAccount sender, String walletNo) {
-        if (sender.getBalance() < amount){
-            System.out.println("Balance is not enough");
+        ValidatorAPI.validator = new PhoneValidator();
+        if (sender.getBalance() < amount || !ValidatorAPI.validator.isValid(walletNo)){
+            System.out.println("Cannot Transact!");
             return;
         }
         sender.setBalance(sender.getBalance() - amount);

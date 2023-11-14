@@ -1,14 +1,17 @@
 package Transaction;
 
 import API.DatabaseAPI;
+import API.ValidatorAPI;
 import UserAccount.UserAccount;
+import Validator.BankIdValidator;
 
 
 public class TransactionToBankAcc implements Transaction {
     @Override
     public void transfer(int amount, UserAccount sender, String bankID) {
-        if (sender.getBalance() < amount) {
-            System.out.println("Balance is not enough");
+        ValidatorAPI.validator = new BankIdValidator();
+        if (sender.getBalance() < amount || !ValidatorAPI.validator.isValid(bankID)) {
+            System.out.println("Cannot Transact!");
             return;
         }
         sender.setBalance(sender.getBalance() - amount);
