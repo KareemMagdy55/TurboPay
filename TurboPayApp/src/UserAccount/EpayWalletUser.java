@@ -3,14 +3,8 @@ package UserAccount;
 public class EpayWalletUser extends WalletUser {
 
     @Override
-    void withdraw(int amount) {
-        System.out.println("EPAY WITHDRAW" + amount);
-
+    public void getWalletType() {
+        System.out.println(" Wallet type is  Epay Wallet");
     }
 
-    @Override
-    void debt(int amount) {
-        System.out.println("EPAY DEBT" + amount);
-
-    }
 }

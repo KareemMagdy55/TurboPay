@@ -24,7 +24,6 @@ public abstract class Registration {
     Registration(){
         userFactory = new UserFactory();
         scanner =new Scanner(System.in);
-        account = new UserAccount();
     }
     public void setUser(int userType){
         account =  userFactory.makeUser(userType);

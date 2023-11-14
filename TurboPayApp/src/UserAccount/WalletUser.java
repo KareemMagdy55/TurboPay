@@ -2,11 +2,7 @@ package UserAccount;
 
 public abstract class WalletUser extends UserAccount {
     String walletID;
-
-    abstract void withdraw(int amount);
-    abstract void debt(int amount);
-
-
+    public abstract void  getWalletType();
     public String getWalletID() {
         return walletID;
     }

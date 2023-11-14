@@ -3,7 +3,7 @@ package UserAccount;
 import Bill.BillPayment;
 
 
-public class UserAccount {
+public abstract class UserAccount {
     private String username;
     private String password;
     private String email;
