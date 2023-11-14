@@ -1,6 +1,7 @@
 package TurboPayMainMenu;
 
 import API.DatabaseAPI;
+import API.ValidatorAPI;
 import AccountDatabaseManger.*;
 import Bill.BillPayment;
 import Registration.*;
@@ -10,6 +11,8 @@ import Transaction.TransactionToBankAcc;
 import Transaction.TransactionToWallet;
 import UserAccount.*;
 import UserAccountFunctionalites.UserAccountFunctionalites;
+import Validator.BankIdValidator;
+import Validator.PhoneValidator;
 
 import java.util.Scanner;
 
@@ -182,8 +185,15 @@ public class TurboPayMainMenu {
         String bankID= scanner.nextLine();
         System.out.println("Please enter the amount");
         int amount = scanner.nextInt();
-        userAccFuncs.setTransaction(new TransactionToBankAcc());
-        userAccFuncs.transfer(amount, bankID);
+
+        ValidatorAPI.validator = new BankIdValidator();
+        if (userAccount.getBalance() < amount || !ValidatorAPI.validator.isValid(bankID) ){
+            System.out.println("Cannot Transact!");
+        }
+        else {
+            userAccFuncs.setTransaction(new TransactionToBankAcc());
+            userAccFuncs.transfer(amount, bankID);
+        }
     }
 
 
@@ -202,8 +212,15 @@ public class TurboPayMainMenu {
         String username= scanner.nextLine();
         System.out.println("Please enter the amount");
         int amount = scanner.nextInt();
-        userAccFuncs.setTransaction(new TransactionToAcc());
-        userAccFuncs.transfer(amount, username);
+
+        if (userAccount.getBalance() < amount ){
+            System.out.println("Cannot Transact!");
+        }
+        else {
+            userAccFuncs.setTransaction(new TransactionToAcc());
+            userAccFuncs.transfer(amount, username);
+        }
+
     }
 
     private void transferToWallet() {
@@ -211,7 +228,14 @@ public class TurboPayMainMenu {
         String phoneNumber = scanner.nextLine();
         System.out.println("Please enter the amount you want to transfer");
         int amount=scanner.nextInt();
-        userAccFuncs.setTransaction(new TransactionToWallet());
-       userAccFuncs.transfer(amount, phoneNumber);
+
+        ValidatorAPI.validator = new PhoneValidator();
+        if (userAccount.getBalance() < amount || !ValidatorAPI.validator.isValid(phoneNumber)){
+            System.out.println("Cannot Transact!");
+        }
+        else {
+            userAccFuncs.setTransaction(new TransactionToWallet());
+            userAccFuncs.transfer(amount, phoneNumber);
+        }
     }
 }
