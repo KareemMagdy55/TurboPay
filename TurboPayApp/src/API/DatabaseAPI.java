@@ -1,11 +1,12 @@
 package API;
 
 import AccountDatabaseManger.AccountRuntimeDatabase;
-import UserAccount.UserAccount;
 
-public class DatabaseAPI {
+// this is the database api
+
+public class DatabaseAPI{
     public static AccountRuntimeDatabase accounts= new AccountRuntimeDatabase();
-
-
-
 }
+
+// this is the database api
+
