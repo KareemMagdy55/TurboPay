@@ -23,12 +23,14 @@ public class TurboPayMainMenu {
     private UserAccount userAccount;
     private UserAccountFunctionalites userAccFuncs;
     private UserFactory userFactory;
+    private RegistrationFactory registrationFactory;
 
     public TurboPayMainMenu() {
         scanner = new Scanner(System.in);
         signInManger = new SignInManger();
 //        userAccount = new BankAccUser();
         userFactory = new UserFactory();
+        registrationFactory = new RegistrationFactory();
     }
 
 
@@ -67,11 +69,7 @@ public class TurboPayMainMenu {
         System.out.println(">>4.Bank User");
         int userType = scanner.nextInt();
         userAccount = userFactory.makeUser(userType);
-        if (userType != 4) {
-            registration = new WalletAccRegistration();
-        } else {
-            registration = new BankAccRegistration();
-        }
+        registration = registrationFactory.makeRegistrationType(userType);
         registration.setUser(userType);
         registration.register();
         userAccount = registration.returnUser();
