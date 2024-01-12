@@ -33,5 +33,5 @@ TurboPay is a financial services platform that enables users to perform money tr
    - Users can create and pay bills for gas, electricity, and water.
    - Bill contents may vary based on the bill types, and assumptions should be made for bill details.
 
-## UML Diagram (draw.io)
-**https://app.diagrams.net/#G1ujdB7nN9I8EcVysOtgyoIfCUh3dSmBHH**
+---
+🌟 _**Be sure to check out the UML diagram for a comprehensive visual representation!**_ 🌟
